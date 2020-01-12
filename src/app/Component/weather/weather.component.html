@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h3 class="text-center my-4">Search for Weather:</h3>
+      <form
+        [formGroup]="weatherSearchForm"
+        (ngSubmit)="sendToAPIXU(weatherSearchForm.value)"
+      >
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            id="weatherLocation"
+            aria-describedby="weatherLocation"
+            placeholder="Please input a Location"
+            formControlName="location"
+          />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary btn-md">
+            Search for weather
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+      <ul id="clock">
+        <li id="hour"></li>
+        <li id="min"></li>
+        <li id="sec"></li>
+      </ul>
+    </div>
+  </div>
+  <!-- Card -->
+
+  <!-- Card -->
+  <div class="card weather-card" *ngIf="weather">
+    <div class="card-body pb-3">
+      <h5 class="card-title font-weight-bold">
+        {{ weather?.location.name }}
+      </h5>
+      <p class="card-text">
+        Mon, {{ weather?.current.observation_time }},
+        {{ weather?.current.weather_descriptions }}
+      </p>
+      <div class="d-flex justify-content-between">
+        <p class="display-1 degree">{{ weather?.current.temperature }}</p>
+        <i class="fas fa-sun-o fa-5x pt-3 amber-text"></i>
+      </div>
+      <div class="d-flex justify-content-between mb-5">
+        <p>
+          <i class="fas fa-tint fa-lg text-info pr-2"></i>humidity :
+          {{ weather?.current.humidity }}
+        </p>
+        <p>
+          <i class="fas fa-leaf fa-lg grey-text pr-2"></i
+          >{{ weather?.current.wind_speed }} km/h Winds
+        </p>
+      </div>
+    </div>
+    <button class="btn btn-default btn-lg" (click)="test()">
+      <span class="glyphicon glyphicon-chevron-down"></span>
+      star
+    </button>
+  </div>
+</div>
+<div class="container" *ngIf="click">
+  <div class="row">
+    <div class="col-6">
+      <div class="card mb-5">
+        <h5 class="text-primary text-center">Current Weather</h5>
+        <div class="view overlay">
+          <img
+            class="card-img-top"
+            src="../../../assets/MDB-Free/img/weat.jpg"
+            alt="Card image cap"
+          />
+        </div>
+        <h5 class="card-title text-center">
+          Description Weather :{{ weather?.current.weather_descriptions }}
+        </h5>
+        <div class="card-body">
+          <h5 class="card-title mx-auto">
+            <img
+              src="{{ weather.current.weather_icons[0] }}"
+              class="rounded-circle text-center"
+              width="50%"
+            />
+          </h5>
+          <h5 class="card-title text-left">
+            Cloud :{{ weather?.current.cloudcover }}
+          </h5>
+          <h5 class="card-title text-left">
+            Feelslike : {{ weather?.current.feelslike }}
+          </h5>
+          <h5 class="card-title text-left">
+            Is day : {{ weather?.current.is_day }}
+          </h5>
+          <h5 class="card-title text-left">
+            Visibility : {{ weather?.current.visibility }}
+          </h5>
+          <h5 class="card-title text-left">
+            Wind Degree : {{ weather?.current.wind_degree }}
+          </h5>
+          <h5 class="card-title text-left">
+            Wind Dir : {{ weather?.current.wind_dir }}
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card mb-5">
+        <h5 class="text-primary text-center">Location</h5>
+        <div class="view overlay">
+          <img
+            class="card-img-top"
+            src="../../../assets/MDB-Free/img/weat.jpg"
+            alt="Card image cap"
+          />
+        </div>
+        <h5 class="card-title text-center">
+          Country :{{ weather?.location.country }}
+        </h5>
+        <div class="card-body">
+          <h5 class="card-title text-left">
+            Latitude :{{ weather?.location.lat }}
+          </h5>
+          <h5 class="card-title text-left">
+            Lontitude :{{ weather?.location.lon }}
+          </h5>
+          <h5 class="card-title text-left">
+            Name :{{ weather?.location.name }}
+          </h5>
+          <h5 class="card-title text-left">
+            Region :{{ weather?.location.region }}
+          </h5>
+          <h5 class="card-title text-left">
+            TimeZone :{{ weather?.location.timezone_id }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
